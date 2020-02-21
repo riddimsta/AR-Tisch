@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+
+<!--    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js"></script>-->
+    <!--    <script src="https://jeromeetienne.github.io/AR.js/three.js/build/ar.js"></script>-->
+
+    <script src="three.js"></script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/jsartoolkit5@0.0.4/build/artoolkit.min.js"></script>
+    <script src="https://stemkoski.github.io/AR-Examples/jsartoolkit5/artoolkit.api.js"></script>
+
+
+    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitsource.js"></script>
+
+    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitcontext.js"></script>
+    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-arbasecontrols.js"></script>
+
+    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-armarkercontrols.js"></script>
+    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-arsmoothedcontrols.js"></script>
+
+    <script src="https://www.jsdelivr.com/package/npm/three-gltf-loader"></script>
+
+</head>
+
+
+<body style="margin : 0px; overflow: hidden; font-family: Monospace;">
+
+<script>
+
+    var scene, camera, renderer, clock, deltaTime, totalTime;
+
+    var arToolkitSource, arToolkitContext;
+
+    var markerRoot1, markerRoot2;
+
+    var mesh1;
+
+    var mouse;
+    var objects = [];
+
+    raycaster = new THREE.Raycaster();
+    mouse = new THREE.Vector2();
+
+    initialize();
+    animate();
+
+    function initialize() {
+
+
+        scene = new THREE.Scene();
+
+        let ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
+        scene.add(ambientLight);
+
+        camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 2000);
+        // Set the camera to 400 units along `z` axis
+        camera.position.set(0, 0, 0);
+
+       // camera = new THREE.Camera();
+        scene.add(camera);
+
+        renderer = new THREE.WebGLRenderer({
+            antialias: true,
+            alpha: true
+        });
+        renderer.setClearColor(new THREE.Color('lightgrey'), 0)
+        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.domElement.style.position = 'absolute'
+        renderer.domElement.style.top = '0px'
+        renderer.domElement.style.left = '0px'
+        document.body.appendChild(renderer.domElement);
+
+        clock = new THREE.Clock();
+        deltaTime = 0;
+        totalTime = 0;
+
+        raycaster = new THREE.Raycaster();
+        renderer.domElement.addEventListener( 'click', raycast, false );
+
+
+
+        ////////////////////////////////////////////////////////////
+        // setup arToolkitSource
+        ////////////////////////////////////////////////////////////
+
+        arToolkitSource = new THREEx.ArToolkitSource({
+            sourceType: 'webcam',
+        });
+
+        function onResize() {
+            arToolkitSource.onResizeElement()
+            arToolkitSource.copyElementSizeTo(renderer.domElement)
+            if (arToolkitContext.arController !== null) {
+                arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
+            }
+        }
+
+        arToolkitSource.init(function onReady() {
+            onResize()
+        });
+
+        // handle resize event
+        window.addEventListener('resize', function () {
+            onResize()
+        });
+
+        ////////////////////////////////////////////////////////////
+        // setup arToolkitContext
+        ////////////////////////////////////////////////////////////
+
+        // create atToolkitContext
+        arToolkitContext = new THREEx.ArToolkitContext({
+            cameraParametersUrl: 'camera_para.dat',
+            detectionMode: 'mono',
+            canvasWidth: window.innerWidth,
+            canvasHeight: window.innerHeight,
+        });
+
+        // copy projection matrix to camera when initialization complete
+        arToolkitContext.init(function onCompleted() {
+            camera.projectionMatrix.copy(arToolkitContext.getProjectionMatrix());
+        });
+
+        ////////////////////////////////////////////////////////////
+        // setup markerRoots
+        ////////////////////////////////////////////////////////////
+
+        // build markerControls
+        markerRoot1 = new THREE.Group();
+        scene.add(markerRoot1);
+        let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
+            type: 'pattern', patternUrl: "pattern-marker.patt",
+        })
+
+
+        let geometry1 = new THREE.CubeGeometry(1, 1, 1);
+        let material1 = new THREE.MeshNormalMaterial({
+            transparent: true,
+            opacity: 0.5,
+            side: THREE.DoubleSide
+        });
+
+        mesh1 = new THREE.Mesh(geometry1, material1);
+        mesh1.position.y = 0.5;
+
+        markerRoot1.add(mesh1);
+
+        // loadModels();
+
+    }
+
+    function raycast ( e ) {
+// Step 1: Detect light helper
+        //1. sets the mouse position with a coordinate system where the center
+        //   of the screen is the origin
+        mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+
+        //2. set the picking ray from the camera position and mouse coordinates
+        raycaster.setFromCamera( mouse, camera );
+
+        //3. compute intersections (note the 2nd parameter)
+        var intersects = raycaster.intersectObjects( scene.children, true );
+
+        for ( var i = 0; i < intersects.length; i++ ) {
+            console.log( intersects[ i ] );
+            /*
+                An intersection has the following properties :
+                    - object : intersected object (THREE.Mesh)
+                    - distance : distance from camera to intersection (number)
+                    - face : intersected face (THREE.Face3)
+                    - faceIndex : intersected face index (number)
+                    - point : intersection point (THREE.Vector3)
+                    - uv : intersection point in the object's UV coordinates (THREE.Vector2)
+            */
+        }
+// Step 2: Detect normal objects
+        //1. sets the mouse position with a coordinate system where the center
+        //   of the screen is the origin
+        mouse.x = ( e.clientX / window.innerWidth ) * 2 - 1;
+        mouse.y = - ( e.clientY / window.innerHeight ) * 2 + 1;
+
+        //2. set the picking ray from the camera position and mouse coordinates
+        raycaster.setFromCamera( mouse, camera );
+
+        //3. compute intersections (no 2nd parameter true anymore)
+        var intersects = raycaster.intersectObjects( scene.children );
+
+        for ( var i = 0; i < intersects.length; i++ ) {
+            console.log( intersects[ i ] );
+            /*
+                An intersection has the following properties :
+                    - object : intersected object (THREE.Mesh)
+                    - distance : distance from camera to intersection (number)
+                    - face : intersected face (THREE.Face3)
+                    - faceIndex : intersected face index (number)
+                    - point : intersection point (THREE.Vector3)
+                    - uv : intersection point in the object's UV coordinates (THREE.Vector2)
+            */
+        }
+
+    }
+
+
+    function update() {
+        // update artoolkit on every frame
+        if (arToolkitSource.ready !== false)
+            arToolkitContext.update(arToolkitSource.domElement);
+    }
+
+
+    function render() {
+        renderer.render(scene, camera);
+    }
+
+/*    function loadModels() {
+        // load gltf model and texture
+        const objs = [];
+        const loader = new THREE
+        loader.load("./z-Monster.gltf", gltf => {
+            // model is a THREE.Group (THREE.Object3D)
+            const mixer = new THREE.AnimationMixer(gltf.scene);
+            // animations is a list of THREE.AnimationClip
+            for (const anim of gltf.animations) {
+                mixer.clipAction(anim).play();
+            }
+            // settings in `sceneList` "Monster"
+            gltf.scene.scale.set(0.4, 0.4, 0.4);
+            gltf.scene.rotation.copy(new THREE.Euler(0, -3 * Math.PI / 4, 0));
+            gltf.scene.position.set(2, 1, 0);
+
+            scene.add(gltf.scene);
+            objs.push({gltf, mixer});
+        });
+
+    }*/
+
+    function animate() {
+        requestAnimationFrame(animate);
+        deltaTime = clock.getDelta();
+        totalTime += deltaTime;
+        update();
+        render();
+    }
+
+</script>
+
+
+</body>
+</html>
+

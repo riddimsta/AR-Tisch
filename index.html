@@ -58,9 +58,10 @@
         let ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
         scene.add(ambientLight);
 
-        camera = new THREE.PerspectiveCamera(20, window.innerWidth / window.innerHeight, 0.1, 2000);
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0, 2000);
         // Set the camera to 400 units along `z` axis
         camera.position.set(0, 0, 0);
+        camera.lookAt( 0, 0, 0 );
 
        // camera = new THREE.Camera();
         scene.add(camera);

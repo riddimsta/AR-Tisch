@@ -58,7 +58,7 @@
         let ambientLight = new THREE.AmbientLight(0xcccccc, 0.5);
         scene.add(ambientLight);
 
-        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0, 2000);
+        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
         // Set the camera to 400 units along `z` axis
         camera.position.set(0, 0, 0);
         camera.lookAt( 0, 0, 0 );
@@ -71,7 +71,7 @@
             alpha: true
         });
         renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-        renderer.setSize(window.innerWidth, window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight, false);
         renderer.domElement.style.position = 'absolute'
         renderer.domElement.style.top = '0px'
         renderer.domElement.style.left = '0px'

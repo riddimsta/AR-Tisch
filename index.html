@@ -36,6 +36,7 @@
     mouse = new THREE.Vector2();
 
     initialize();
+
     animate();
 
     function initialize() {
@@ -47,7 +48,7 @@
 
         camera = new THREE.Camera();
 
-        camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+        camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 
         scene.add(camera);
@@ -57,7 +58,7 @@
             alpha: true
         });
         renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-        renderer.setSize(640, 480);
+        //renderer.setSize(640, 480);
         renderer.domElement.style.position = 'absolute'
         renderer.domElement.style.top = '0px'
         renderer.domElement.style.left = '0px'
@@ -77,14 +78,26 @@
 
         arToolkitSource = new THREEx.ArToolkitSource({
             sourceType: 'webcam',
+            // resolution of at which we initialize the source image
+            sourceWidth: 640,
+            sourceHeight: 480,
+            // resolution displayed for the source
+            displayWidth: 640,
+            displayHeight: 480,
         });
 
-        function onResize() {
+        function onResize(el) {
+
+            //camera.aspect = window.innerWidth / window.innerHeight;
+
+            //renderer.setSize( window.innerWidth, window.innerHeight );
+
             arToolkitSource.onResizeElement()
             arToolkitSource.copyElementSizeTo(renderer.domElement)
             if (arToolkitContext.arController !== null) {
                 arToolkitSource.copyElementSizeTo(arToolkitContext.arController.canvas)
             }
+            //camera.updateProjectionMatrix();
         }
 
         arToolkitSource.init(function onReady() {
@@ -92,9 +105,7 @@
         });
 
         // handle resize event
-        window.addEventListener('resize', function () {
-            onResize()
-        });
+        window.addEventListener('resize', onResize);
 
         ////////////////////////////////////////////////////////////
         // setup arToolkitContext
@@ -118,22 +129,24 @@
 
         // build markerControls
         markerRoot1 = new THREE.Group();
-        scene.add(markerRoot1);
         let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
             type: 'pattern', patternUrl: "pattern-marker.patt",
         })
 
-        let geometry1	= new THREE.CubeGeometry(1,1,1);
-        let material1	= new THREE.MeshNormalMaterial({
+        var geometry1 = new THREE.BoxGeometry( 1, 1, 1 );
+        let material1	= new THREE.MeshPhongMaterial({
             transparent: true,
-            opacity: 0.5,
-            side: THREE.DoubleSide
+            opacity: 1,
+            color: 0x2194ce
         });
 
         mesh1 = new THREE.Mesh( geometry1, material1 );
-        mesh1.position.y = 0.5;
-
+        //mesh1.position.y = 1;
+        mesh1.rotateX(1,5708);
+        mesh1.material.color.setHex(0xdce015);
         markerRoot1.add( mesh1 );
+        scene.add(markerRoot1);
+
     }
 
     function raycast(e) {
@@ -141,7 +154,7 @@
         var rect = renderer.domElement.getBoundingClientRect();
         mouse.x = ( ( e.clientX - rect.left ) / ( rect.width - rect.left ) ) * 2 - 1;
         mouse.y = - ( ( e.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
-// Step 1: Detect light helper
+        // Step 1: Detect light helper
         //1. sets the mouse position with a coordinate system where the center
         //   of the screen is the origin
 
@@ -149,10 +162,24 @@
         raycaster.setFromCamera(mouse, camera);
 
         //3. compute intersections (note the 2nd parameter)
-        var intersects = raycaster.intersectObjects(scene.children, true);
-
+        var intersects = raycaster.intersectObject(mesh1);
+        var COLORS = [
+            'pink',
+            //'blue',
+            'yellow',
+            'red',
+            'peachpuff',
+            '#2EAFAC',
+            '#BAE'];
         for (var i = 0; i < intersects.length; i++) {
             console.log(intersects[i]);
+            var randomIndex = Math.floor(Math.random() * COLORS.length);
+            var newColor = COLORS[randomIndex];
+            intersects[ i ].object.material.color.setHex(newColor);
+
+
+
+
             /*
                 An intersection has the following properties :
                     - object : intersected object (THREE.Mesh)
@@ -163,6 +190,31 @@
                     - uv : intersection point in the object's UV coordinates (THREE.Vector2)
             */
         }
+        /*var rect = renderer.domElement.getBoundingClientRect();
+        mouse.x = ( ( e.clientX - rect.left ) / ( rect.width - rect.left ) ) * 2 - 1;
+        mouse.y = - ( ( e.clientY - rect.top ) / ( rect.bottom - rect.top) ) * 2 + 1;
+
+        var vector = new THREE.Vector3(mouse.x, mouse.y, 0.0);
+        // Unproject camera distortion (fov, aspect ratio)
+        vector.unproject(camera);
+        var norm = vector.sub(camera.position).normalize();
+        // Cast a line from our camera to the tmpMesh and see where these
+        // two intersect. That's our 2D position in 3D coordinates.
+        var ray = new THREE.Raycaster(camera.position, norm);
+        var intersects = ray.intersectObject(mesh1);
+
+        for (var i = 0; i < intersects.length; i++) {
+            console.log(intersects[i]);
+            /!*
+                An intersection has the following properties :
+                    - object : intersected object (THREE.Mesh)
+                    - distance : distance from )camera to intersection (number)
+                    - face : intersected face (THREE.Face3)
+                    - faceIndex : intersected face index (number
+                    - point : intersection point (THREE.Vector3)
+                    - uv : intersection point in the object's UV coordinates (THREE.Vector2)
+            *!/
+        }*/
 
     }
 
@@ -171,6 +223,7 @@
         // update artoolkit on every frame
         if (arToolkitSource.ready !== false)
             arToolkitContext.update(arToolkitSource.domElement);
+
     }
 
 
@@ -202,10 +255,11 @@
 
     function animate() {
         requestAnimationFrame(animate);
-        deltaTime = clock.getDelta();
-        totalTime += deltaTime;
+        //deltaTime = clock.getDelta();
+        //totalTime += deltaTime;
         update();
         render();
+
     }
 
 </script>

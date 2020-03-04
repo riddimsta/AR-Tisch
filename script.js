@@ -34,14 +34,14 @@ function initialize() {
         alpha: true
     });
     renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-    renderer.setSize( 640, 480 );
+    renderer.setSize(640, 480);
 
     renderer.domElement.style.position = 'absolute'
     renderer.domElement.style.top = '0px'
     renderer.domElement.style.left = '0px'
     document.body.appendChild(renderer.domElement);
 
-    renderer.domElement.addEventListener('click', raycast, false);
+    // renderer.domElement.addEventListener('click', raycast, false);
 
     ////////////////////////////////////////////////////////////
     // setup arToolkitSource
@@ -104,23 +104,23 @@ function initialize() {
         type: 'pattern', patternUrl: "pattern-marker.patt",
     })
 
-    let geometry1	= new THREE.CubeGeometry(1,1,1);
-    let material1	= new THREE.MeshNormalMaterial({
+    let geometry1 = new THREE.CubeGeometry(1, 1, 1);
+    let material1 = new THREE.MeshNormalMaterial({
         transparent: true,
         opacity: 0.5,
         side: THREE.DoubleSide
     });
 
-    mesh1 = new THREE.Mesh( geometry1, material1 );
+    mesh1 = new THREE.Mesh(geometry1, material1);
     mesh1.position.y = 0.5;
 
-    markerRoot1.add( mesh1 );
-    scene.add(markerRoot1);
+    markerRoot1.add(mesh1);
+    // scene.add(markerRoot1);
 
 
 }
 
-function raycast(e) {
+/*function raycast(e) {
 
     var rect = renderer.domElement.getBoundingClientRect();
     mouse.x = ((e.clientX - rect.left) / (rect.width - rect.left)) * 2 - 1;
@@ -149,7 +149,7 @@ function raycast(e) {
         intersects[i].object.material.color.setHex(newColor);
 
     }
-}
+}*/
 
 
 function update() {
@@ -172,4 +172,26 @@ function animate() {
     update();
     render();
 
+}
+
+$(function () {
+    $("#accordion").accordion({
+        collapsible: true,
+        active: false,
+        activate: function (event, ui) {
+            addObject();
+        }
+
+    });
+});
+
+
+
+
+function addObject() {
+    scene.add(markerRoot1);
+}
+
+function removeObject() {
+    scene.remove(markerRoot1);
 }

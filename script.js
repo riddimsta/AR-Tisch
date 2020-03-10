@@ -2,12 +2,12 @@ var scene, camera, renderer, clock, deltaTime, totalTime;
 
 var arToolkitSource, arToolkitContext;
 
-var markerRoot1, markerRoot2;
+var markerRoot1;
+var objects;
 
 var mesh1;
 
 var mouse;
-var objects = [];
 
 raycaster = new THREE.Raycaster();
 mouse = new THREE.Vector2();
@@ -100,6 +100,7 @@ function initialize() {
 
     // build markerControls
     markerRoot1 = new THREE.Group();
+    scene.add(markerRoot1);
     let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
         type: 'pattern', patternUrl: "pattern-marker.patt",
     })
@@ -113,44 +114,76 @@ function initialize() {
 
     mesh1 = new THREE.Mesh(geometry1, material1);
     mesh1.position.y = 0.5;
+    mesh1.name = "0";
+    mesh1.visible = false;
 
-    markerRoot1.add(mesh1);
-    // scene.add(markerRoot1);
 
+    let geometry2 = new THREE.CubeGeometry(1, 1, 1);
+    let material2 = new THREE.MeshNormalMaterial({
+        transparent: true,
+        opacity: 0.8,
+        side: THREE.DoubleSide
+    });
+
+    mesh2 = new THREE.Mesh(geometry2, material2);
+    mesh2.position.set(1, 1, 1);
+    mesh2.name = "1";
+    mesh2.visible = false;
+
+    objects = new THREE.Object3D();
+    objects.add(mesh1);
+    objects.add(mesh2);
+
+    markerRoot1.add(objects);
+    var manager = new THREE.LoadingManager();
+
+    var loader = new THREE.GLTFLoader( manager );
+
+
+    //var dracoLoader = new THREE.DRACOLoader();
+    //dracoLoader.setDecoderPath( '/js/threejs/libs/draco/' );
+    //loader.setDRACOLoader( dracoLoader );
+    var filename = "7.glb";
+
+    loader.load( filename, function(s) {
+
+        var object = s.scene;
+        console.log("model loaded");
+
+        //traverse gltf scene content
+
+        var model = object.getObjectByName('Cube');
+
+        console.log("--> traversing gltf scene");
+        var index = 0;
+        object.traverse( function ( child ) {
+
+            console.log(index + " - " + child.name);
+            index++;
+
+        });
+       object.scale.set(10,10,10);
+        console.log("render once");
+        markerRoot1.add(object);
+        scene.add(markerRoot1);
+      //  renderer.render( scene, camera );
+
+    });
+
+/*    var loader = new THREE.GLTFLoader();
+    loader.load('untitled.glb',
+        function (gltf) {
+            gltf.scene.scale.set(5,5,5);
+            markerRoot1.add(gltf.scene);
+            scene.add(markerRoot1);
+            const model = gltf.scene.children[ 0 ];
+
+            console.log(model.name);
+        }, undefined, function (error) {
+            console.error(error);
+        });*/
 
 }
-
-/*function raycast(e) {
-
-    var rect = renderer.domElement.getBoundingClientRect();
-    mouse.x = ((e.clientX - rect.left) / (rect.width - rect.left)) * 2 - 1;
-    mouse.y = -((e.clientY - rect.top) / (rect.bottom - rect.top)) * 2 + 1;
-    // Step 1: Detect light helper
-    //1. sets the mouse position with a coordinate system where the center
-    //   of the screen is the origin
-
-    //2. set the picking ray from the camera position and mouse coordinates
-    raycaster.setFromCamera(mouse, camera);
-
-    //3. compute intersections (note the 2nd parameter)
-    var intersects = raycaster.intersectObject(mesh1);
-    var COLORS = [
-        'pink',
-        //'blue',
-        'yellow',
-        'red',
-        'peachpuff',
-        '#2EAFAC',
-        '#BAE'];
-    for (var i = 0; i < intersects.length; i++) {
-        console.log(intersects[i]);
-        var randomIndex = Math.floor(Math.random() * COLORS.length);
-        var newColor = COLORS[randomIndex];
-        intersects[i].object.material.color.setHex(newColor);
-
-    }
-}*/
-
 
 function update() {
 // update artoolkit on every frame
@@ -167,8 +200,6 @@ function render() {
 
 function animate() {
     requestAnimationFrame(animate);
-    //deltaTime = clock.getDelta();
-    //totalTime += deltaTime;
     update();
     render();
 
@@ -178,20 +209,44 @@ $(function () {
     $("#accordion").accordion({
         collapsible: true,
         active: false,
-        activate: function (event, ui) {
-            addObject();
-        }
+        activate: function () {
+            var active = jQuery("#accordion").accordion('option', 'active');
+            removeObject();
+            if (active === false) {
+                return
+            } else {
+                active = String(active);
 
+                objects.traverse(function (obj) {
+
+                    if (active === obj.name) {
+
+                        addObject(obj);
+                    } else {
+
+                    }
+
+
+                });
+
+            }
+        }
     });
 });
 
 
+function addObject(object) {
+    object.visible = true;
 
-
-function addObject() {
-    scene.add(markerRoot1);
 }
 
 function removeObject() {
-    scene.remove(markerRoot1);
+
+    objects.traverse(function (obj) {
+        if (obj instanceof THREE.Mesh) {
+            obj.visible = false;
+        }
+        ;
+    });
+
 }

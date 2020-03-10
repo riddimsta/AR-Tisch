@@ -31,7 +31,8 @@ function initialize() {
 
     renderer = new THREE.WebGLRenderer({
         antialias: true,
-        alpha: true
+        alpha: true,
+        logarithmicDepthBuffer: true,
     });
     renderer.setClearColor(new THREE.Color('lightgrey'), 0)
     renderer.setSize(window.innerWidth, window.innerHeight);

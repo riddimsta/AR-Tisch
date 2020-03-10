@@ -108,7 +108,7 @@ function initialize() {
 
     let material1 = new THREE.MeshNormalMaterial({
         transparent: true,
-        opacity: 0.5,
+        opacity: true,
         side: THREE.DoubleSide
     });
     const radius = 6;
@@ -116,7 +116,7 @@ function initialize() {
     const segments = 16;
     const geometry = new THREE.ConeBufferGeometry(radius, height, segments);
     mesh1 = new THREE.Mesh(geometry, material1);
-    mesh1.scale.set(0.07, 0.07, 0.07);
+    mesh1.scale.set(0.04, 0.04, 0.04);
     mesh1.position.y = 1.7;
     mesh1.rotation.x = Math.PI;
     mesh1.name = "0";
@@ -124,7 +124,7 @@ function initialize() {
 
 
     mesh2 = new THREE.Mesh(geometry, material1);
-    mesh2.scale.set(0.07, 0.07, 0.07);
+    mesh2.scale.set(0.04, 0.04, 0.04);
     mesh2.position.y = 1.7;
     mesh2.position.x = 1.2;
     mesh2.position.z = 1.2;
@@ -172,23 +172,11 @@ function initialize() {
 
     });
 
-    /*    var loader = new THREE.GLTFLoader();
-        loader.load('untitled.glb',
-            function (gltf) {
-                gltf.scene.scale.set(5,5,5);
-                markerRoot1.add(gltf.scene);
-                scene.add(markerRoot1);
-                const model = gltf.scene.children[ 0 ];
-
-                console.log(model.name);
-            }, undefined, function (error) {
-                console.error(error);
-            });*/
-
 }
 
 function update() {
-// update artoolkit on every frame
+
+    // update artoolkit on every frame
     if (arToolkitSource.ready !== false)
         arToolkitContext.update(arToolkitSource.domElement);
 
@@ -238,6 +226,8 @@ $(function () {
 
 
 function addObject(object) {
+   // object.material.opacity = 0.5 + 0.5*Math.sin(new Date().getTime() * .0025);
+
     object.visible = true;
 
 }

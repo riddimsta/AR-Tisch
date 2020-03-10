@@ -34,7 +34,7 @@ function initialize() {
         alpha: true
     });
     renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-    renderer.setSize(640, 480);
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
     renderer.domElement.style.position = 'absolute'
     renderer.domElement.style.top = '0px'
@@ -102,7 +102,7 @@ function initialize() {
     markerRoot1 = new THREE.Group();
     scene.add(markerRoot1);
     let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-        type: 'pattern', patternUrl: "pattern-marker.patt",
+        type: 'pattern', patternUrl: "pattern-marker.patt", smooth: 'true',
     })
 
 

@@ -105,28 +105,30 @@ function initialize() {
         type: 'pattern', patternUrl: "pattern-marker.patt",
     })
 
-    let geometry1 = new THREE.CubeGeometry(1, 1, 1);
+
     let material1 = new THREE.MeshNormalMaterial({
         transparent: true,
         opacity: 0.5,
         side: THREE.DoubleSide
     });
-
-    mesh1 = new THREE.Mesh(geometry1, material1);
-    mesh1.position.y = 0.5;
+    const radius = 6;
+    const height = 8;
+    const segments = 16;
+    const geometry = new THREE.ConeBufferGeometry(radius, height, segments);
+    mesh1 = new THREE.Mesh(geometry, material1);
+    mesh1.scale.set(0.07, 0.07, 0.07);
+    mesh1.position.y = 1.7;
+    mesh1.rotation.x = Math.PI;
     mesh1.name = "0";
     mesh1.visible = false;
 
 
-    let geometry2 = new THREE.CubeGeometry(1, 1, 1);
-    let material2 = new THREE.MeshNormalMaterial({
-        transparent: true,
-        opacity: 0.8,
-        side: THREE.DoubleSide
-    });
-
-    mesh2 = new THREE.Mesh(geometry2, material2);
-    mesh2.position.set(1, 1, 1);
+    mesh2 = new THREE.Mesh(geometry, material1);
+    mesh2.scale.set(0.07, 0.07, 0.07);
+    mesh2.position.y = 1.7;
+    mesh2.position.x = 1.2;
+    mesh2.position.z = 1.2;
+    mesh2.rotation.x = Math.PI;
     mesh2.name = "1";
     mesh2.visible = false;
 
@@ -137,7 +139,7 @@ function initialize() {
     markerRoot1.add(objects);
     var manager = new THREE.LoadingManager();
 
-    var loader = new THREE.GLTFLoader( manager );
+    var loader = new THREE.GLTFLoader(manager);
 
 
     //var dracoLoader = new THREE.DRACOLoader();
@@ -145,7 +147,7 @@ function initialize() {
     //loader.setDRACOLoader( dracoLoader );
     var filename = "7.glb";
 
-    loader.load( filename, function(s) {
+    loader.load(filename, function (s) {
 
         var object = s.scene;
         console.log("model loaded");
@@ -156,32 +158,32 @@ function initialize() {
 
         console.log("--> traversing gltf scene");
         var index = 0;
-        object.traverse( function ( child ) {
+        object.traverse(function (child) {
 
             console.log(index + " - " + child.name);
             index++;
 
         });
-       object.scale.set(10,10,10);
+        object.scale.set(8, 8, 8);
         console.log("render once");
         markerRoot1.add(object);
         scene.add(markerRoot1);
-      //  renderer.render( scene, camera );
+        //  renderer.render( scene, camera );
 
     });
 
-/*    var loader = new THREE.GLTFLoader();
-    loader.load('untitled.glb',
-        function (gltf) {
-            gltf.scene.scale.set(5,5,5);
-            markerRoot1.add(gltf.scene);
-            scene.add(markerRoot1);
-            const model = gltf.scene.children[ 0 ];
+    /*    var loader = new THREE.GLTFLoader();
+        loader.load('untitled.glb',
+            function (gltf) {
+                gltf.scene.scale.set(5,5,5);
+                markerRoot1.add(gltf.scene);
+                scene.add(markerRoot1);
+                const model = gltf.scene.children[ 0 ];
 
-            console.log(model.name);
-        }, undefined, function (error) {
-            console.error(error);
-        });*/
+                console.log(model.name);
+            }, undefined, function (error) {
+                console.error(error);
+            });*/
 
 }
 

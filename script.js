@@ -25,7 +25,7 @@ function initialize() {
 
     camera = new THREE.Camera();
 
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 1000);
 
     scene.add(camera);
 
@@ -33,6 +33,7 @@ function initialize() {
         antialias: true,
         alpha: true,
         logarithmicDepthBuffer: true,
+        sortObjects: true,
     });
     renderer.setClearColor(new THREE.Color('lightgrey'), 0)
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -89,6 +90,19 @@ function initialize() {
         detectionMode: 'mono',
 
     });
+
+/*
+    arToolkitContext.init(function onCompleted(){
+        let m = arToolkitContext.getProjectionMatrix();
+        let far = 1000;
+        let near = 0.1;
+
+        m.elements[10] = -(far + near) / (far - near);
+        m.elements[14] = -(2 * far * near) / (far - near);
+
+        camera.projectionMatrix.copy(m);
+    });
+*/
 
     // copy projection matrix to camera when initialization complete
     arToolkitContext.init(function onCompleted() {

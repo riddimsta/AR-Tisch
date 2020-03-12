@@ -20,8 +20,14 @@ function initialize() {
 
     scene = new THREE.Scene();
 
-    let ambientLight = new THREE.AmbientLight(0xcccccc, 1);
-    scene.add(ambientLight);
+    var hemiLight = new THREE.HemisphereLight(0xffffff, 0x444444);
+    hemiLight.position.set(0, 300, 0);
+    scene.add(hemiLight);
+
+    var dirLight = new THREE.DirectionalLight(0xffffff);
+    dirLight.position.set(75, 300, -75);
+    scene.add(dirLight);
+
 
     camera = new THREE.Camera();
 
@@ -33,7 +39,7 @@ function initialize() {
         antialias: true,
         alpha: true,
         logarithmicDepthBuffer: true,
-        sortObjects: true,
+
     });
     renderer.setClearColor(new THREE.Color('lightgrey'), 0)
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -41,6 +47,10 @@ function initialize() {
     renderer.domElement.style.position = 'absolute'
     renderer.domElement.style.top = '0px'
     renderer.domElement.style.left = '0px'
+    renderer.gammaOutput = true;
+    renderer.gammaFactor = 2;
+    //renderer.physicallyCorrectLights=true;
+
     document.body.appendChild(renderer.domElement);
 
     // renderer.domElement.addEventListener('click', raycast, false);
@@ -91,18 +101,6 @@ function initialize() {
 
     });
 
-/*
-    arToolkitContext.init(function onCompleted(){
-        let m = arToolkitContext.getProjectionMatrix();
-        let far = 1000;
-        let near = 0.1;
-
-        m.elements[10] = -(far + near) / (far - near);
-        m.elements[14] = -(2 * far * near) / (far - near);
-
-        camera.projectionMatrix.copy(m);
-    });
-*/
 
     // copy projection matrix to camera when initialization complete
     arToolkitContext.init(function onCompleted() {
@@ -160,7 +158,7 @@ function initialize() {
     //var dracoLoader = new THREE.DRACOLoader();
     //dracoLoader.setDecoderPath( '/js/threejs/libs/draco/' );
     //loader.setDRACOLoader( dracoLoader );
-    var filename = "7.glb";
+    var filename = "lidice.glb";
 
     loader.load(filename, function (s) {
 
@@ -179,7 +177,7 @@ function initialize() {
             index++;
 
         });
-        object.scale.set(8, 8, 8);
+        object.scale.set(7, 7, 7);
         console.log("render once");
         markerRoot1.add(object);
         scene.add(markerRoot1);
@@ -241,7 +239,7 @@ $(function () {
 
 
 function addObject(object) {
-   // object.material.opacity = 0.5 + 0.5*Math.sin(new Date().getTime() * .0025);
+    // object.material.opacity = 0.5 + 0.5*Math.sin(new Date().getTime() * .0025);
 
     object.visible = true;
 

@@ -2,6 +2,8 @@
 
 <head>
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
     <title>Hello, AR Cube!</title>
     <!-- include three.js library -->
     <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js'></script>
@@ -21,13 +23,28 @@
 
         #accordion {
             position: absolute;
-            width: 20%;
+            width: 25%;
             height: 100%;
-            padding-left: 10px;
-            padding-right: 10px;
+            padding-left: 1%;
             background-color: #2d5f5d;
             z-index: 10;
+        }
 
+        #accordion .ui-accordion-content {
+            width: 100%;
+            /*background-color: #f3f3f3;*/
+            /*color: #777;*/
+            font-size: 10pt;
+            line-height: 16pt;
+            padding-right: 5%;
+            heightStyle: "content"
+
+
+        }
+
+        #accordion .ui-accordion-header {
+            margin: 0px;
+            padding-top: 20px;
         }
 
         #video-container {
@@ -36,6 +53,15 @@
             position: absolute;
         }
 
+        :focus, :active {
+            outline: 0;
+        }
+
+        * {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+        }
 
 
     </style>
@@ -81,6 +107,11 @@
             <li>List item two</li>
             <li>List item three</li>
         </ul>
+        <p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus
+            in
+            massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper. Sed ac felis. Sed commodo,
+            magna
+            quis lacinia ornare, quam ante aliquam nisi, eu iaculis leo purus venenatis dui. </p>
     </div>
     <h3>Gedenkstätte</h3>
     <div>

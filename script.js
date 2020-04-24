@@ -53,8 +53,6 @@ function initialize() {
 
     document.body.appendChild(renderer.domElement);
 
-    // renderer.domElement.addEventListener('click', raycast, false);
-
     ////////////////////////////////////////////////////////////
     // setup arToolkitSource
     ////////////////////////////////////////////////////////////
@@ -158,7 +156,9 @@ function initialize() {
     //var dracoLoader = new THREE.DRACOLoader();
     //dracoLoader.setDecoderPath( '/js/threejs/libs/draco/' );
     //loader.setDRACOLoader( dracoLoader );
-    var filename = "lidice.glb";
+
+
+    var filename = "assets/lidice.glb";
 
     loader.load(filename, function (s) {
 
@@ -168,15 +168,20 @@ function initialize() {
         //traverse gltf scene content
 
         var model = object.getObjectByName('Cube');
+        //    var control = new TransformControls(camera, renderer.domElement);
 
         console.log("--> traversing gltf scene");
         var index = 0;
-        object.traverse(function (child) {
+/*        object.traverse(function (child) {
+            markerRoot1.add.child;
+
+            // control.attach(child);
+
 
             console.log(index + " - " + child.name);
             index++;
 
-        });
+        });*/
         object.scale.set(7, 7, 7);
         console.log("render once");
         markerRoot1.add(object);
@@ -208,10 +213,17 @@ function animate() {
 
 }
 
+
 $(function () {
+    var icons = {
+        header: "ui-icon-circle-arrow-e",
+        activeHeader: "ui-icon-circle-arrow-s"
+    };
     $("#accordion").accordion({
         collapsible: true,
         active: false,
+        icons: icons,
+        heightStyle: "content",
         activate: function () {
             var active = jQuery("#accordion").accordion('option', 'active');
             removeObject();

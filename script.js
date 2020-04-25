@@ -164,7 +164,7 @@ function initialize() {
 
         model = s.scene;
         console.log("model loaded");
-        
+
             //traverse gltf scene content
 
             //var model = object.getObjectByName('Cube');

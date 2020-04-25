@@ -28,8 +28,11 @@
 
     <!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">-->
 
+    <link href="lightbox.css" rel="stylesheet"/>
 
     <link rel="stylesheet" type="text/css" href="bootstrap-4.4.1-dist/css/bootstrap.css">
+
+    <script src="lightbox.js"></script>
 
 
     <style>
@@ -106,7 +109,7 @@
             border-bottom: 1px solid #ffffff;
             font-size: 10pt;
             line-height: 16pt;
-            padding-right: 5%;
+            padding-right: 4%;
             overflow: auto;
         }
 
@@ -158,7 +161,7 @@
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
 <div id="lidicelogo">
-    <img src="assets/Glasscheibe_Lidice4314-1.png" style="height: 15%; width: 15%">
+    <img src="assets/Glasscheibe_Lidice4314-1.png" style="height: 18%; width: 18%">
 </div>
 
 
@@ -177,19 +180,26 @@
 
         <h3>WOHNHAUS LADISLAVA HIMLOVÁ</h3>
         <div>
-            <img src="assets/ladislava_himlová.jpg" style="width: 40%; height: 40%;float: left; padding-right: 2%">
+            <a class="example-image-link hoverZoomLink" href="assets/ladislava_himlová.jpg" data-lightbox="image-1"
+               data-title="Ladislava Himlová">
+                <img class="example-image hoverZoomLink" src="assets/ladislava_himlová.jpg"
+                     style="width: 40%; height: 40%;float: left; padding-right: 2%"> </a>
             <p>Hier wohnte Ladislava Himlová. Sie wurde in das Konzentrationslager Ravensbrück deportiert.
                 Im digitalen Archiv findest Du mehr Informationen über ihr Leben vor und nach dem Massaker.</p>
         </div>
         <h3>WOHNHAUS FAMILIE SUCHÁNEK</h3>
         <div>
-            <img src="assets/fam_suchanek_1.jpg" style="width: 100%; height: 40%;float: left">
+            <a class="example-image-link hoverZoomLink" href="assets/fam_suchanek_1.jpg" data-lightbox="image-2"
+               data-title="Familie Suchánek">
+                <img src="assets/fam_suchanek_1.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Hier wohnte die Familie Suchánek. Sie teilte sich ihr Wohnhaus mit der Familie Nová.
                 Im digitalen Archiv findest Du mehr Informationen über die einzelnen Familienmitglieder.</p>
         </div>
         <h3>DORFSCHULE</h3>
         <div>
-            <img src="assets/schule.jpg" style="width: 100%; height: 40%;float: left">
+            <a class="example-image-link hoverZoomLink" href="assets/schule.jpg" data-lightbox="image-3"
+               data-title="Dorfschule">
+                <img src="assets/schule.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Hier befand sich das Schulgebäude. Die Frauen und Kinder wurden vor ihrer Deportation im Schulgebäude bis
                 5
                 Uhr morgens eingesperrt.
@@ -197,7 +207,9 @@
         </div>
         <h3>BAUERNHOF FAMILIE HORÁK</h3>
         <div>
-            <img src="assets/scheunenwand.jpg" style="width: 100%; height: 40%;float: left">
+            <a class="example-image-link hoverZoomLink" href="assets/scheunenwand.jpg" data-lightbox="image-4"
+               data-title="Mauerrest der Scheunenwand">
+                <img src="assets/scheunenwand.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>173 Männer wurden an der Scheunenwand des Hofes der Familie Horák erschossen. Heute verweist ein kleiner
                 Mauerrest und ein Denkmal
                 an den historischen Ort. Auf der gegenüberliegenden Seite verweist ein Denkmal an das Massengrab.</p>
@@ -209,14 +221,18 @@
         </div>
         <h3>BIRNBAUM</h3>
         <div>
-            <img src="assets/birnbaum.jpg" style="width: 100%; height: 40%;float: left">
+            <a class="example-image-link hoverZoomLink" href="assets/birnbaum.jpg" data-lightbox="image-5"
+               data-title="Birnbaum">
+                <img src="assets/birnbaum.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Hier befindet sich ein Birnbaum und die Reste eines Brunnens, die die Zerstörung des Dorfes überlebten.
                 Ein Ableger des Birnbaums wurde 2016 von Gästen aus Lidice nach Bremen mitgebracht und auf dem Gelände
                 unserer Jugendbildungsstätte gepflanzt.</p>
         </div>
         <h3>MAHNMAL FÜR DIE KINDER</h3>
         <div>
-            <img src="assets/mahnmal_kinder.jpg" style="width: 100%; height: 40%;float: left">
+            <a class="example-image-link hoverZoomLink" href="assets/mahnmal_kinder.jpg" data-lightbox="image-6"
+               data-title="„Denkmal der Kinderopfer des Krieges“">
+                <img src="assets/mahnmal_kinder.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Hier steht das „Denkmal der Kinderopfer des Krieges“. Eine Gruppe von 82 Statuen erinnert an die Lidicer
                 Kinder,
                 die im Vernichtungslager Chelmo ermordet wurden. Die Bildhauerin Marie Uchytilová arbeitete zwanzig
@@ -225,7 +241,9 @@
         </div>
         <h3>MUSEUM</h3>
         <div>
-            <img src="assets/museum.jpg" style="width: 100%; height: 40%;float: left">
+            <a class="example-image-link hoverZoomLink" href="assets/museum.jpg" data-lightbox="image-7"
+               data-title="Museum">
+                <img src="assets/museum.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Das Museum wurde 1962 nach den Plänen des Architekten František Marek gebaut. 2005 begann eine große
                 Renovierung und Vergrößerung des gesamten Geländes.
                 Ein Jahr später, im Rahmen des Gedenkaktes zum 64. Jahrestages der Vernichtung des Dorfes Lidice, wurde

@@ -71,6 +71,19 @@
 
         }
 
+
+        #lidicelogo {
+            position: relative;
+            z-index: 15;
+            background-color: #02161f;
+            height: 100%;
+            width: 22%;
+            padding-bottom: 1%;
+            padding-left: 1%;
+            padding-top: 1%;
+
+        }
+
         #accordion-container {
             position: absolute;
             width: 22%;
@@ -81,6 +94,7 @@
             overflow: auto;
             z-index: 10;
             padding-top: 1%;
+
         }
 
         #accordion {
@@ -105,9 +119,10 @@
         }
 
         #video-container {
-            width: 100px;
-            height: 100px;
+            width: 100vh;
+            height: 100vh;
             position: absolute;
+            z-index: 1;
         }
 
         :focus, :active {
@@ -134,16 +149,6 @@
             height: 20px;
         }
 
-        #lidicelogo {
-            z-index: 11;
-            background-color: #02161f;
-            height: 100%;
-            width: 22%;
-            padding-bottom: 1%;
-            padding-left: 1%;
-            padding-top: 1%;
-
-        }
 
     </style>
 
@@ -152,6 +157,10 @@
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
+<div id="lidicelogo">
+    <img src="assets/Glasscheibe_Lidice4314-1.png" style="height: 15%; width: 15%">
+</div>
+
 
 <div id="video-container">
 
@@ -159,9 +168,7 @@
 
 </div>
 
-<div id="lidicelogo">
-    <img src="assets/Glasscheibe_Lidice4314-1.png" style="height: 15%; width: 15%">
-</div>
+
 <div id="accordion-container">
 
 
@@ -180,12 +187,7 @@
             <p>Hier wohnte die Familie Suchánek. Sie teilte sich ihr Wohnhaus mit der Familie Nová.
                 Im digitalen Archiv findest Du mehr Informationen über die einzelnen Familienmitglieder.</p>
         </div>
-        <h3>WOHNHAUS FAMILIE HANF/HANFOVÁ</h3>
-        <div>
-            <p>Familie Hanf/Hanfová wohnte in Lidice im Haus Nr. 70.
-                Im digitalen Archiv findest Du mehr Informationen über die einzelnen Familienmitglieder.</p>
-        </div>
-        <h3>SCHULE</h3>
+        <h3>DORFSCHULE</h3>
         <div>
             <img src="assets/schule.jpg" style="width: 100%; height: 40%;float: left">
             <p>Hier befand sich das Schulgebäude. Die Frauen und Kinder wurden vor ihrer Deportation im Schulgebäude bis
@@ -199,6 +201,11 @@
             <p>173 Männer wurden an der Scheunenwand des Hofes der Familie Horák erschossen. Heute verweist ein kleiner
                 Mauerrest und ein Denkmal
                 an den historischen Ort. Auf der gegenüberliegenden Seite verweist ein Denkmal an das Massengrab.</p>
+        </div>
+        <h3>WOHNHAUS FAMILIE HANF/HANFOVÁ</h3>
+        <div>
+            <p>Familie Hanf/Hanfová wohnte in Lidice im Haus Nr. 70.
+                Im digitalen Archiv findest Du mehr Informationen über die einzelnen Familienmitglieder.</p>
         </div>
         <h3>BIRNBAUM</h3>
         <div>
@@ -228,7 +235,7 @@
                 Ausstellung
                 informiert Besucher über das Leben und
                 Schicksal der Dorfbewohner, über seine Zerstörung und den Wiederaufbau vor dem Hintergrund der
-                Schlüsselereignisse, die sich zu dieser Zeit ereigneten.</p>
+                Schlüsselereignisse, die sich zu dieser Zeit ereigneten.<br><br><br><br><br></p>
         </div>
     </div>
 

@@ -4,8 +4,9 @@ var arToolkitSource, arToolkitContext;
 
 var markerRoot1;
 var objects;
-
+var model;
 var mesh1;
+var neuesmesh;
 
 var mouse;
 
@@ -14,7 +15,6 @@ mouse = new THREE.Vector2();
 
 initialize();
 
-animate();
 
 function initialize() {
 
@@ -63,8 +63,8 @@ function initialize() {
         sourceWidth: 640,
         sourceHeight: 480,
         // resolution displayed for the source
-        displayWidth: 640,
-        displayHeight: 480,
+        displayWidth: window.innerWidth,
+        displayHeight: window.innerHeight,
     });
 
     function onResize(el) {
@@ -158,21 +158,21 @@ function initialize() {
     //loader.setDRACOLoader( dracoLoader );
 
 
-    var filename = "assets/lidice.glb";
+    var filename = "assets/lidice_model.glb";
 
     loader.load(filename, function (s) {
 
-        var object = s.scene;
+        model = s.scene;
         console.log("model loaded");
+        
+            //traverse gltf scene content
 
-        //traverse gltf scene content
+            //var model = object.getObjectByName('Cube');
+            //    var control = new TransformControls(camera, renderer.domElement);
 
-        var model = object.getObjectByName('Cube');
-        //    var control = new TransformControls(camera, renderer.domElement);
-
-        console.log("--> traversing gltf scene");
+            console.log("--> traversing gltf scene");
         var index = 0;
-/*        object.traverse(function (child) {
+        model.traverse(function (child) {
             markerRoot1.add.child;
 
             // control.attach(child);
@@ -180,34 +180,54 @@ function initialize() {
 
             console.log(index + " - " + child.name);
             index++;
+            if (child.name == "#1" || child.name == "#2" || child.name == "#3" || child.name == "#4" ||
+                child.name == "#5" || child.name == "#6" || child.name == "#7" || child.name == "#8") {
 
-        });*/
-        object.scale.set(7, 7, 7);
+                child.visible = false;
+            }
+        });
+        model.scale.set(7, 7, 7);
         console.log("render once");
-        markerRoot1.add(object);
+
+        markerRoot1.add(model);
         scene.add(markerRoot1);
+
+        animate();
+
+
         //  renderer.render( scene, camera );
 
     });
-
 }
 
 function update() {
-
     // update artoolkit on every frame
     if (arToolkitSource.ready !== false)
         arToolkitContext.update(arToolkitSource.domElement);
+
 
 }
 
 
 function render() {
-    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+
+
 }
 
 
 function animate() {
     requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+    /*        model.traverse(function (child) {
+                if (child.name == "0#" || child.name == "1#" || child.name == "2#" || child.name == "3#" ||
+                child.name == "4#" || child.name == "5#" || child.name == "6#" || child.name == "7#") {
+                    if (child.visible) {
+                        child.rotation.y += 1;
+                        obj.rotateOnAxis(new THREE.Vector3(0,0,1), 90*Math.PI/180);
+                    }
+                }
+            });*/
     update();
     render();
 
@@ -230,40 +250,26 @@ $(function () {
             if (active === false) {
                 return
             } else {
-                active = String(active);
-
-                objects.traverse(function (obj) {
-
+                active = active + 1;
+                active = String("#" + active);
+                model.traverse(function (obj) {
                     if (active === obj.name) {
-
-                        addObject(obj);
+                        obj.visible = true;
                     } else {
-
                     }
-
-
                 });
-
             }
         }
     });
 });
 
-
-function addObject(object) {
-    // object.material.opacity = 0.5 + 0.5*Math.sin(new Date().getTime() * .0025);
-
-    object.visible = true;
-
-}
-
 function removeObject() {
 
-    objects.traverse(function (obj) {
-        if (obj instanceof THREE.Mesh) {
-            obj.visible = false;
-        }
-        ;
+    model.traverse(function (child) {
+        if (child.name == "#1" || child.name == "#2" || child.name == "#3" || child.name == "#4" ||
+            child.name == "#5" || child.name == "#6" || child.name == "#7" || child.name == "#8") {
+            child.visible = false;
+        };
     });
 
 }

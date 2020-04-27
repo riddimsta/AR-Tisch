@@ -6,200 +6,80 @@
 
     <title>Hello, AR Cube!</title>
     <!-- include three.js library -->
-    <script src='https://cdnjs.cloudflare.com/ajax/libs/three.js/110/three.js'></script>
+
+    <script src="javascript/three.js"></script>
+
     <!-- include jsartookit -->
-    <script src="https://stemkoski.github.io/AR-Examples/jsartoolkit5/artoolkit.min.js"></script>
-    <script src="https://stemkoski.github.io/AR-Examples/jsartoolkit5/artoolkit.api.js"></script>
+    <script src="javascript/artoolkit.min.js"></script>
+
+    <script src="javascript/artoolkit.api.js"></script>
+
+    
     <!-- include threex.artoolkit -->
-    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitsource.js"></script>
-    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-artoolkitcontext.js"></script>
-    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-arbasecontrols.js"></script>
-    <script src="https://stemkoski.github.io/AR-Examples/threex/threex-armarkercontrols.js"></script>
+    <script src="javascript/threex-artoolkitsource.js"></script>
+    <script src="javascript/threex-artoolkitcontext.js"></script>
+    <script src="javascript/threex-arbasecontrols.js"></script>
+    <script src="javascript/threex-armarkercontrols.js"></script>
 
-    <script src="https://cdn.rawgit.com/mrdoob/three.js/master/examples/js/loaders/GLTFLoader.js"></script>
+    <script src="javascript/GLTFLoader.js"></script>
 
-    <!--    <script src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>-->
+    <script src="javascript/jquery-1.12.4.js"></script>
 
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <script src="javascript/jquery-ui.js"></script>
 
+    <script src="javascript/lightbox.js"></script>
 
-    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <!--    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/smoothness/jquery-ui.css">-->
-
-    <link href="lightbox.css" rel="stylesheet"/>
+    <link href="css/lightbox.css" rel="stylesheet"/>
 
     <link rel="stylesheet" type="text/css" href="bootstrap-4.4.1-dist/css/bootstrap.css">
+    <link href="css/fonts.googleapis.css" rel="stylesheet">
 
-    <script src="lightbox.js"></script>
+    <link rel="stylesheet" href="css/eigene.css">
 
-
-    <style>
-
-        p {
-            font-family: 'Roboto', sans-serif;
-            size: 16px;
-            color: #ffffff;
-        }
-
-        h3 {
-            font-family: 'Roboto', sans-serif;
-            size: 50px;
-            color: #ffffff;
-            font-weight: bold;
-        }
-
-        /* width */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-
-        /* Track */
-        ::-webkit-scrollbar-track {
-            border-radius: 10px;
-
-        }
-
-        /* Handle */
-        ::-webkit-scrollbar-thumb {
-            background: #888;
-            border-radius: 10px;
-
-        }
-
-        /* Handle on hover */
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555;
-
-        }
-
-
-        #lidicelogo {
-            position: relative;
-            z-index: 15;
-            background-color: #02161f;
-            height: 100%;
-            width: 22%;
-            padding-bottom: 1%;
-            padding-left: 1%;
-            padding-top: 1%;
-
-        }
-
-        #accordion-container {
-            position: absolute;
-            width: 22%;
-            height: 100%;
-            padding-left: 1%;
-            background-color: #2d5f5d;
-            background-image: linear-gradient(#2d5f5d, rgba(0, 0, 0, 0.82)); /* Standard syntax (must be last) */
-            overflow: auto;
-            z-index: 10;
-            padding-top: 1%;
-
-        }
-
-        #accordion {
-
-        }
-
-        #accordion .ui-accordion-content {
-            width: 100%;
-            border-bottom: 1px solid #ffffff;
-            font-size: 10pt;
-            line-height: 16pt;
-            padding-right: 4%;
-            overflow: auto;
-        }
-
-        #accordion .ui-accordion-header {
-            margin-right: 10px;
-            padding-top: 20px;
-            padding-right: 20px;
-            padding-bottom: 10px;
-            border-bottom: 1px solid #ffffff;
-        }
-
-        #video-container {
-            width: 100vh;
-            height: 100vh;
-            position: absolute;
-            z-index: 1;
-        }
-
-        :focus, :active {
-            outline: 0;
-        }
-
-        * {
-            -moz-box-sizing: border-box;
-            -webkit-box-sizing: border-box;
-            box-sizing: border-box;
-        }
-
-        #accordion .ui-icon.iconOpen {
-            background: url('http://i.stack.imgur.com/vNQ2g.png?s=64&g=1') no-repeat;
-            background-size: 20px;
-            width: 20px;
-            height: 20px;
-        }
-
-        #accordion .ui-icon.iconClosed {
-            background: url('http://gillespaquette.ca/images/stack-icon.png') no-repeat -5px;
-            background-size: 30px;
-            width: 20px;
-            height: 20px;
-        }
-
-
-    </style>
 
 </head>
-
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 
 <div id="lidicelogo">
-    <img src="assets/Glasscheibe_Lidice4314-1.png" style="height: 18%; width: 18%">
+    <img src="assets/images/Glasscheibe_Lidice4314-1.png" style="height: 18%; width: 18%">
 </div>
 
 
 <div id="video-container">
 
-    <script src="script.js"></script>
+    <script src="javascript/script.js"></script>
 
 </div>
 
 
 <div id="accordion-container">
 
-
     <div id="accordion">
-
 
         <h3>WOHNHAUS LADISLAVA HIMLOVÁ</h3>
         <div>
-            <a class="example-image-link hoverZoomLink" href="assets/ladislava_himlová.jpg" data-lightbox="image-1"
+            <a class="example-image-link hoverZoomLink" href="assets/images/ladislava_himlová.jpg"
+               data-lightbox="image-1"
                data-title="Ladislava Himlová">
-                <img class="example-image hoverZoomLink" src="assets/ladislava_himlová.jpg"
+                <img class="example-image hoverZoomLink" src="assets/images/ladislava_himlová.jpg"
                      style="width: 40%; height: 40%;float: left; padding-right: 2%"> </a>
             <p>Hier wohnte Ladislava Himlová. Sie wurde in das Konzentrationslager Ravensbrück deportiert.
                 Im digitalen Archiv findest Du mehr Informationen über ihr Leben vor und nach dem Massaker.</p>
         </div>
         <h3>WOHNHAUS FAMILIE SUCHÁNEK</h3>
         <div>
-            <a class="example-image-link hoverZoomLink" href="assets/fam_suchanek_1.jpg" data-lightbox="image-2"
+            <a class="example-image-link hoverZoomLink" href="assets/images/fam_suchanek_1.jpg" data-lightbox="image-2"
                data-title="Familie Suchánek">
-                <img src="assets/fam_suchanek_1.jpg" style="width: 100%; height: 40%;float: left"> </a>
+                <img src="assets/images/fam_suchanek_1.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Hier wohnte die Familie Suchánek. Sie teilte sich ihr Wohnhaus mit der Familie Nová.
                 Im digitalen Archiv findest Du mehr Informationen über die einzelnen Familienmitglieder.</p>
         </div>
         <h3>DORFSCHULE</h3>
         <div>
-            <a class="example-image-link hoverZoomLink" href="assets/schule.jpg" data-lightbox="image-3"
+            <a class="example-image-link hoverZoomLink" href="assets/images/schule.jpg" data-lightbox="image-3"
                data-title="Dorfschule">
-                <img src="assets/schule.jpg" style="width: 100%; height: 40%;float: left"> </a>
+                <img src="assets/images/schule.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Hier befand sich das Schulgebäude. Die Frauen und Kinder wurden vor ihrer Deportation im Schulgebäude bis
                 5
                 Uhr morgens eingesperrt.
@@ -207,9 +87,9 @@
         </div>
         <h3>BAUERNHOF FAMILIE HORÁK</h3>
         <div>
-            <a class="example-image-link hoverZoomLink" href="assets/scheunenwand.jpg" data-lightbox="image-4"
+            <a class="example-image-link hoverZoomLink" href="assets/images/scheunenwand.jpg" data-lightbox="image-4"
                data-title="Mauerrest der Scheunenwand">
-                <img src="assets/scheunenwand.jpg" style="width: 100%; height: 40%;float: left"> </a>
+                <img src="assets/images/scheunenwand.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>173 Männer wurden an der Scheunenwand des Hofes der Familie Horák erschossen. Heute verweist ein kleiner
                 Mauerrest und ein Denkmal
                 an den historischen Ort. Auf der gegenüberliegenden Seite verweist ein Denkmal an das Massengrab.</p>
@@ -221,18 +101,18 @@
         </div>
         <h3>BIRNBAUM</h3>
         <div>
-            <a class="example-image-link hoverZoomLink" href="assets/birnbaum.jpg" data-lightbox="image-5"
+            <a class="example-image-link hoverZoomLink" href="assets/images/birnbaum.jpg" data-lightbox="image-5"
                data-title="Birnbaum">
-                <img src="assets/birnbaum.jpg" style="width: 100%; height: 40%;float: left"> </a>
+                <img src="assets/images/birnbaum.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Hier befindet sich ein Birnbaum und die Reste eines Brunnens, die die Zerstörung des Dorfes überlebten.
                 Ein Ableger des Birnbaums wurde 2016 von Gästen aus Lidice nach Bremen mitgebracht und auf dem Gelände
                 unserer Jugendbildungsstätte gepflanzt.</p>
         </div>
         <h3>MAHNMAL FÜR DIE KINDER</h3>
         <div>
-            <a class="example-image-link hoverZoomLink" href="assets/mahnmal_kinder.jpg" data-lightbox="image-6"
+            <a class="example-image-link hoverZoomLink" href="assets/images/mahnmal_kinder.jpg" data-lightbox="image-6"
                data-title="„Denkmal der Kinderopfer des Krieges“">
-                <img src="assets/mahnmal_kinder.jpg" style="width: 100%; height: 40%;float: left"> </a>
+                <img src="assets/images/mahnmal_kinder.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Hier steht das „Denkmal der Kinderopfer des Krieges“. Eine Gruppe von 82 Statuen erinnert an die Lidicer
                 Kinder,
                 die im Vernichtungslager Chelmo ermordet wurden. Die Bildhauerin Marie Uchytilová arbeitete zwanzig
@@ -241,9 +121,9 @@
         </div>
         <h3>MUSEUM</h3>
         <div>
-            <a class="example-image-link hoverZoomLink" href="assets/museum.jpg" data-lightbox="image-7"
+            <a class="example-image-link hoverZoomLink" href="assets/images/museum.jpg" data-lightbox="image-7"
                data-title="Museum">
-                <img src="assets/museum.jpg" style="width: 100%; height: 40%;float: left"> </a>
+                <img src="assets/images/museum.jpg" style="width: 100%; height: 40%;float: left"> </a>
             <p>Das Museum wurde 1962 nach den Plänen des Architekten František Marek gebaut. 2005 begann eine große
                 Renovierung und Vergrößerung des gesamten Geländes.
                 Ein Jahr später, im Rahmen des Gedenkaktes zum 64. Jahrestages der Vernichtung des Dorfes Lidice, wurde
@@ -256,9 +136,7 @@
                 Schlüsselereignisse, die sich zu dieser Zeit ereigneten.<br><br><br><br><br></p>
         </div>
     </div>
-
 </div>
-
 
 </body>
 </html>

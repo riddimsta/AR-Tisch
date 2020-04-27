@@ -1,0 +1,107 @@
+p {
+    font-family: 'Roboto', sans-serif;
+    size: 16px;
+    color: #ffffff;
+}
+
+h3 {
+    font-family: 'Roboto', sans-serif;
+    size: 50px;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+#lidicelogo {
+    position: relative;
+    z-index: 15;
+    background-color: #02161f;
+    height: 100%;
+    width: 22%;
+    padding-bottom: 1%;
+    padding-left: 1%;
+    padding-top: 1%;
+}
+
+#accordion-container {
+    position: absolute;
+    width: 22%;
+    height: 100%;
+    padding-left: 1%;
+    background-color: #2d5f5d;
+    background-image: linear-gradient(#2d5f5d, rgba(0, 0, 0, 0.82)); /* Standard syntax (must be last) */
+    overflow: auto;
+    z-index: 10;
+    padding-top: 1%;
+}
+
+#accordion {
+}
+
+#accordion .ui-accordion-content {
+    width: 100%;
+    border-bottom: 1px solid #ffffff;
+    font-size: 10pt;
+    line-height: 16pt;
+    padding-right: 4%;
+    overflow: auto;
+}
+
+#accordion .ui-accordion-header {
+    margin-right: 10px;
+    padding-top: 20px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ffffff;
+}
+
+#video-container {
+    width: 100vh;
+    height: 100vh;
+    position: absolute;
+    z-index: 1;
+}
+
+:focus, :active {
+    outline: 0;
+}
+
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+#accordion .ui-icon.iconOpen {
+    background: url('http://i.stack.imgur.com/vNQ2g.png?s=64&g=1') no-repeat;
+    background-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+#accordion .ui-icon.iconClosed {
+    background: url('http://gillespaquette.ca/images/stack-icon.png') no-repeat -5px;
+    background-size: 30px;
+    width: 20px;
+    height: 20px;
+}

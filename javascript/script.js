@@ -106,7 +106,7 @@ function initialize() {
 
     var loader = new THREE.GLTFLoader(manager);
 
-    var filename = "assets/images/lidice_model.glb";
+    var filename = "assets/images/lidice_model_test_neu.glb";
 
     loader.load(filename, function (s) {
 
@@ -118,12 +118,20 @@ function initialize() {
             markerRoot1.add.child;
             console.log(index + " - " + child.name);
             index++;
-            if (child.name == "#1" || child.name == "#2" || child.name == "#3" || child.name == "#4" ||
-                child.name == "#5" || child.name == "#6" || child.name == "#7" || child.name == "#8") {
 
+            if (child.name == "##1" || child.name == "##2" || child.name == "##3" || child.name == "##4" ||
+                child.name == "##5" || child.name == "##6" || child.name == "##7" || child.name == "##8") {
                 child.visible = false;
+
+/*                var newMaterial = new THREE.MeshBasicMaterial({color: 0x00ffff, side: THREE.DoubleSide});
+                if (child.isMesh) {
+                    console.log("guuuuuuuuuuuuut");
+                    child.material = newMaterial;
+
+                }*/
             }
         });
+        //model.rotateY(3.14);
         model.scale.set(7, 7, 7);
         console.log("render once");
 
@@ -141,14 +149,14 @@ function update() {
         arToolkitContext.update(arToolkitSource.domElement);
 
     model.traverse(function (child) {
-        if (child.name == "#1" || child.name == "#2" || child.name == "#3" || child.name == "#4" ||
-            child.name == "#5" || child.name == "#6" || child.name == "#7" || child.name == "#8") {
+        if (child.name == "##1" || child.name == "##2" || child.name == "##3" || child.name == "##4" ||
+            child.name == "##5" || child.name == "##6" || child.name == "##7" || child.name == "##8") {
             if (child.visible) {
                 // child.rotation.y += 0.1;
-/*                while (child.position.y < 0.05) {
-                    child.position.y += 0.0001;
-                    //obj.rotateOnAxis(new THREE.Vector3(0,0,1), 90*Math.PI/180);
-                }*/
+                /*                while (child.position.y < 0.05) {
+                                    child.position.y += 0.0001;
+                                    //obj.rotateOnAxis(new THREE.Vector3(0,0,1), 90*Math.PI/180);
+                                }*/
             }
         }
     });
@@ -181,14 +189,17 @@ $(function () {
         activate: function () {
             var active = jQuery("#accordion").accordion('option', 'active');
             removeObject();
+            console.log(active);
             if (active === false) {
                 return
             } else {
                 active = active + 1;
-                active = String("#" + active);
+                active = String("##" + active);
                 model.traverse(function (obj) {
                     if (active === obj.name) {
+
                         obj.visible = true;
+
                     } else {
                     }
                 });
@@ -199,8 +210,8 @@ $(function () {
 
 function removeObject() {
     model.traverse(function (child) {
-        if (child.name == "#1" || child.name == "#2" || child.name == "#3" || child.name == "#4" ||
-            child.name == "#5" || child.name == "#6" || child.name == "#7" || child.name == "#8") {
+        if (child.name == "##1" || child.name == "##2" || child.name == "##3" || child.name == "##4" ||
+            child.name == "##5" || child.name == "##6" || child.name == "##7" || child.name == "##8") {
             child.visible = false;
         }
         ;

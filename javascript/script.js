@@ -106,7 +106,7 @@ function initialize() {
 
     var loader = new THREE.GLTFLoader(manager);
 
-    var filename = "assets/images/lidice_model_test_neu.glb";
+    var filename = "assets/images/lidice_model.glb";
 
     loader.load(filename, function (s) {
 

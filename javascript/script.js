@@ -100,7 +100,15 @@ function initialize() {
     scene.add(markerRoot1);
     let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
         type: 'pattern', patternUrl: "pattern-marker1.patt"
-    })
+    });
+
+    let smoothedRoot = new THREE.Group();
+    scene.add(smoothedRoot);
+    smoothedControls = new THREEx.ArSmoothedControls(smoothedRoot, {
+        lerpPosition: 0.1,
+        lerpQuaternion: 0.1,
+        lerpScale: 1,
+    });
 
     var manager = new THREE.LoadingManager();
 
@@ -136,8 +144,11 @@ function initialize() {
         model.rotation.y = -Math.PI / 2;
         console.log("render once");
 
-        markerRoot1.add(model);
-        scene.add(markerRoot1);
+        //markerRoot1.add(model);
+        //scene.add(markerRoot1);
+
+        smoothedRoot.add(model);
+
 
         animate();
 
@@ -161,6 +172,9 @@ function update() {
             }
         }
     });
+
+    smoothedControls.update(markerRoot1);
+
 }
 
 

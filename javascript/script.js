@@ -99,7 +99,7 @@ function initialize() {
     markerRoot1 = new THREE.Group();
     scene.add(markerRoot1);
     let markerControls1 = new THREEx.ArMarkerControls(arToolkitContext, markerRoot1, {
-        type: 'pattern', patternUrl: "pattern-marker1.patt", smooth: 'true',
+        type: 'pattern', patternUrl: "pattern-marker1.patt"
     })
 
     var manager = new THREE.LoadingManager();
@@ -132,7 +132,8 @@ function initialize() {
             }
         });
         //model.rotateY(3.14);
-        model.scale.set(7, 7, 7);
+        model.scale.set(4, 4, 4);
+        model.rotation.y = -Math.PI / 2;
         console.log("render once");
 
         markerRoot1.add(model);
